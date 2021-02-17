@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
+import Button from '@material-ui/core/Button';
+import { useSelector, useDispatch } from "react-redux";
+import { increment } from "./actions/action";
+import { decrement } from "./actions/action";
+
 
 function App() {
+  const counter = useSelector(state => state.counter);
+  const isLogged = useSelector(state => state.isLogged);
+  const dispatch = useDispatch();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>counter {counter}</h1>
+      <Button style={{background:'green'}} onClick={() => dispatch(increment(5))} ><AddIcon /></Button>
+      <Button style={{background:'red'}} onClick={() => dispatch(decrement())} ><RemoveIcon /></Button>
+
+      {/* {!isLogged ? <h3>Log in </h3>> : ''} */}
     </div>
   );
 }
